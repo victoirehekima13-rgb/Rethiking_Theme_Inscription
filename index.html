@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concours de recherche de Rethinking Economics - Faculté d'Économie et de Gestion - UCB</title>
+
+  <script>
+    const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/DbuaC7tW6ccIRCVnC8GIyU?s=cl&p=a&mlu=4&ilr=4";
+    const EMAIL_TO = "reucbukavu@rethinkeconomics.org; mwirango.muvundja@ucbukavu.ac.cd; hekima.mugongo@ucbukavu.ac.cd";
+
+    const LOGOS = {
+      rethinking: "REC-LOGO.png",
+      ucb: "ucb logo.jpg"
+    };
+
+    function buildMailtoLink(form) {
+      const data = new FormData(form);
+      const nom = data.get("nom") || "";
+      const prenom = data.get("prenom") || "";
+      const postnom = data.get("postnom") || "";
+      const matricule = data.get("matricule") || "";
+      const email = data.get("email") || "";
+      const telephone = data.get("telephone") || "";
+      const promotion = data.get("promotion") || "";
+      const theme = data.get("theme") || "";
+      const motivation = data.get("motivation") || "";
+
+      const subject = encodeURIComponent("Inscription au concours de recherche - UCB");
+      const body = encodeURIComponent(
+        "Bonjour,\n\nVoici les informations de l'inscription :\n\n" +
+        "Nom : " + nom + "\n" +
+        "Prénom : " + prenom + "\n" +
+        "Postnom : " + postnom + "\n" +
+        "Matricule : " + matricule + "\n" +
+        "E-mail : " + email + "\n" +
+        "Téléphone : " + telephone + "\n" +
+        "Promotion : " + promotion + "\n" +
+        "Thème : " + theme + "\n" +
+        "Motivation : " + motivation + "\n\n" +
+        "Merci."
+      );
+
+      return "mailto:" + EMAIL_TO + "?subject=" + subject + "&body=" + body;
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary: #0b3d75;
+      --primary-2: #154c8a;
+      --secondary: #e9a13b;
+      --accent: #dfeaf7;
+      --text: #1d1d1d;
+      --muted: #5f6f7f;
+      --border: #dfe4ea;
+      --bg: #f5f7fb;
+      --white: #ffffff;
+      --success: #0d8f5d;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #eef4fb 0%, #f8fbff 100%);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      background: var(--white);
+      border-radius: 18px;
+      box-shadow: 0 12px 35px rgba(11, 61, 117, 0.12);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .header {
+      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-2) 100%);
+      color: white;
+      padding: 28px 30px;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .logo-box {
+      width: 110px;
+      height: 110px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+    }
+
+    .logo-box svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 2vw, 2.4rem);
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      color: rgba(255,255,255,0.86);
+      font-size: 0.98rem;
+    }
+
+    .body {
+      padding: 28px 30px 30px;
+    }
+
+    .section {
+      margin-bottom: 26px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      color: var(--primary);
+      font-size: 1.2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--secondary);
+      display: inline-block;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(220px, 1fr));
+      gap: 18px 22px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: 700;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    input, select, textarea, button {
+      font: inherit;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="file"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--text);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(11, 61, 117, 0.08);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      padding-top: 4px;
+    }
+
+    .radio-option {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #f9fbff;
+      font-weight: 600;
+    }
+
+    .radio-option input {
+      accent-color: var(--primary);
+      width: 16px;
+      height: 16px;
+      margin: 0;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.84rem;
+      margin-top: 8px;
+    }
+
+    .file-wrap {
+      padding: 10px 12px;
+      border: 1px dashed var(--primary);
+      border-radius: 12px;
+      background: var(--accent);
+    }
+
+    .file-wrap input[type="file"] {
+      border: none;
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 26px;
+    }
+
+    .submit-btn {
+      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-2) 100%);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      min-width: 220px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 20px rgba(11, 61, 117, 0.18);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .footer-note {
+      margin-top: 26px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 0;
+      }
+
+      .container {
+        margin: 0;
+        border-radius: 0;
+        width: 100%;
+      }
+
+      .header {
+        padding: 20px 16px;
+      }
+
+      .body {
+        padding: 18px 14px 20px;
+      }
+
+      .header-top {
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .brand {
+        justify-content: center;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .logo-box {
+        width: 84px;
+        height: 84px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .section {
+        margin-bottom: 18px;
+        padding-bottom: 16px;
+      }
+
+      .section-title {
+        font-size: 1.05rem;
+      }
+
+      label {
+        font-size: 0.9rem;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="number"],
+      input[type="file"],
+      select,
+      textarea {
+        padding: 11px 12px;
+        font-size: 16px;
+      }
+
+      .actions {
+        width: 100%;
+        margin-top: 18px;
+      }
+
+      .submit-btn,
+      .actions a {
+        width: 100%;
+        min-width: 0;
+        display: block;
+        text-align: center;
+        padding: 14px 16px;
+        font-size: 0.96rem;
+      }
+
+      .footer-note {
+        font-size: 0.82rem;
+        line-height: 1.5;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header-top">
+        <div class="brand">
+          <div class="logo-box" aria-label="Logo de Rethinking Economics">
+            <img id="logo-rethinking" alt="Logo Rethinking Economics" style="width:100%; height:100%; object-fit:contain; display:block;" />
+          </div>
+
+          <div>
+            <h1>Concours de recherche</h1>
+            <div class="subtitle">Faculté d’Économie et de Gestion - Université Catholique de Bukavu (UCB)</div>
+          </div>
+        </div>
+
+        <div class="logo-box" aria-label="Logo de l'Université Catholique de Bukavu">
+          <img id="logo-ucb" alt="Logo Université Catholique de Bukavu" style="width:100%; height:100%; object-fit:contain; display:block;" />
+        </div>
+      </div>
+    </header>
+
+    <main class="body">
+      <form id="inscriptionForm" method="post" enctype="multipart/form-data">
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("inscriptionForm");
+            const logoRethinking = document.getElementById("logo-rethinking");
+            const logoUcb = document.getElementById("logo-ucb");
+
+            if (logoRethinking) logoRethinking.src = LOGOS.rethinking;
+            if (logoUcb) logoUcb.src = LOGOS.ucb;
+
+            form.addEventListener("submit", function (event) {
+              event.preventDefault();
+
+              const mailtoLink = buildMailtoLink(form);
+              const mailWindow = window.open(mailtoLink, "_self");
+
+              if (mailWindow) {
+                window.open(WHATSAPP_GROUP_URL, "_blank");
+              } else {
+                window.location.href = WHATSAPP_GROUP_URL;
+              }
+            });
+          });
+        </script>
+
+        <section class="section">
+          <h2 class="section-title">Informations personnelles</h2>
+          <div class="form-grid">
+            <div class="field">
+              <label for="nom">Nom</label>
+              <input type="text" id="nom" name="nom" placeholder="Entrez votre nom" required />
+            </div>
+
+            <div class="field">
+              <label for="prenom">Prénom</label>
+              <input type="text" id="prenom" name="prenom" placeholder="Entrez votre prénom" required />
+            </div>
+
+            <div class="field">
+              <label for="postnom">Postnom</label>
+              <input type="text" id="postnom" name="postnom" placeholder="Entrez votre postnom" />
+            </div>
+
+            <div class="field">
+              <label for="matricule">N° matricule / code étudiant</label>
+              <input type="text" id="matricule" name="matricule" placeholder="Ex. 03.23.08756" required />
+            </div>
+
+            <div class="field">
+              <label for="email">Adresse e-mail</label>
+              <input type="email" id="email" name="email" placeholder="votre.email@ucbukavu.ac.cd" required />
+            </div>
+
+            <div class="field">
+              <label for="telephone">Téléphone</label>
+              <input type="tel" id="telephone" name="telephone" placeholder="Ex. +243 000 000 000" required />
+            </div>
+
+            <div class="field full">
+              <label for="faculte">Faculté</label>
+              <input type="text" id="faculte" name="faculte" value="Faculté d'Économie et de Gestion - UCB" readonly />
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Promotion</h2>
+          <div class="field">
+            <label for="promotion">Choisir votre promotion</label>
+            <select id="promotion" name="promotion" required>
+              <option value="">-- Sélectionner --</option>
+              <option value="Bac1 Eco">Bac1 Eco</option>
+              <option value="Bac2">Bac2 Eco</option>
+            </select>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Thème</h2>
+          <div class="field">
+            <label for="theme">Sélectionner un seul thème</label>
+            <select id="theme" name="theme" required>
+              <option value="">-- Sélectionner un thème --</option>
+              <option value="Les Réseaux sociaux">Les Réseaux sociaux</option>
+              <option value="Changement climatique">Changement climatique</option>
+              <option value="Économie numérique">Économie numérique</option>
+              <option value="Entrepreneuriat des jeunes">Entrepreneuriat des jeunes</option>
+              <option value="Épargne étudiante">Épargne étudiante</option>
+              <option value="Chômage des jeunes">Chômage des jeunes</option>
+              <option value="Budget étudiant">Budget étudiant</option>
+            </select>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Carte d'étudiant</h2>
+          <div class="field full">
+            <label for="carte">Téléverser votre carte d'étudiant</label>
+            <div class="file-wrap">
+              <input type="file" id="carte" name="carte" accept=".jpg,.jpeg,.png,.pdf" required />
+            </div>
+            <div class="note">Formats acceptés : JPG, JPEG, PNG, PDF.</div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Motivation</h2>
+          <div class="field full">
+            <label for="motivation">Pourquoi souhaitez-vous participer à ce concours ?</label>
+            <textarea id="motivation" name="motivation" placeholder="Décrivez brièvement votre motivation..."></textarea>
+          </div>
+        </section>
+
+        <div class="actions">
+          <button type="submit" class="submit-btn">Soumettre l'inscription</button>
+        </div>
+
+        <div class="actions" style="margin-top: 14px;">
+          <a href="https://chat.whatsapp.com/DbuaC7tW6ccIRCVnC8GlyU?s=cl&p=a&mlu=4&ilr=4" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #25D366; color: white; text-decoration: none; padding: 12px 20px; border-radius: 10px; font-weight: 700;">
+            Rejoindre le groupe WhatsApp
+          </a>
+        </div>
+      </form>
+
+      <div class="footer-note">
+        Les informations sont destinées à l’envoi du dossier au comité du concours de recherche de la Faculté d’Économie et de Gestion de l’UCB.
+      </div>
+    </main>
+  </div>
+</body>
+</html>
